@@ -1,0 +1,9 @@
+{
+    "000000": {
+        "name": "Admin",
+        "department": "System",
+        "password": "admin123",
+        "role": "admin",
+        "courses": {}
+    }
+}
