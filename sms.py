@@ -89,11 +89,12 @@ def admin_dashboard():
         return
 
     while True:
-        print("\n------------- ADMIN DASHBOARD ---------------")
+        print("\n================== ADMIN DASHBOARD ================")
         print("1. View all students")
         print("2. Delete student")
-        print("3. View student details")
+        print("3. Search student")
         print("4. Logout to main menu")
+        pribt("===================================================")
 
         choice = input("Choose option: ")
 
@@ -229,6 +230,20 @@ def calculate_gpa():
     print(f"Name: {students[student_id]['name']}")
     print(f"GPA: {round(gpa, 2)}")
 
+def view_student():
+    student_id = input("Enter STUDENT_ID: ")
+
+    if student_id in students:
+        student = students[student_id]
+
+        print("\n -----Student Found-----")
+        print(f"STUDENT_ID: {student_id}\n")
+        print(f"Name: {student['name']}\n")
+        print(f"Department: {student['department']}")
+    else:
+        print("Student not found.")
+
+
 def logout():
     global current_user
 
@@ -238,19 +253,6 @@ def logout():
     else:
         print("No user is logged in")
 
-def menu():
-    print("------------ Student Management System Menu ----------")
-    print("1. Register")
-    print("2. Login")
-    print("3. Logout")
-    print("4. View students")
-    print("5. Search student")
-    print("6. Delete student")
-    print("7. Add course score")
-    print("8. Calculate GPA")
-    print("0. Exit ")
-
-
 load_data()
 create_default_admin()
 
@@ -259,19 +261,17 @@ def menu():
     print("\n=========== Student Management System Menu ===========")
     print("1. Register")
     print("2. Login")
-    print("3. Logout")
-    print("4. View all students (Admin)")
-    print("5. Search student")
-    print("6. Delete student (Admin)")
-    print("7. Add course score (Student)")
-    print("8. Calculate GPA (Student)")
+    print("3. View student Info.")
+    print("4. Add course score ")
+    print("5. Calculate GPA")
+    print("6. Logout")
     print("0. Exit")
     print("==========================================================")
 
 
 while True:
     menu()
-    choice = input("Select option (0 - 8):")
+    choice = input("Select option (0 - 6):")
     print(" ")
 
     if choice == "1":
@@ -281,28 +281,16 @@ while True:
         login()
 
     elif choice == "3":
-        logout()
+        view_student()
 
     elif choice == "4":
-        if current_user and students[current_user]["role"] == "admin":
-            view_all_students()
-        else:
-            print("Admin only")
-
-    elif choice == "5":
-        search_student()
-
-    elif choice == "6":
-        if current_user and students[current_user]["role"] == "admin":
-            delete_student()
-        else:
-            print("Admin only")
-
-    elif choice == "7":
         add_course_score()
 
-    elif choice == "8":
+    elif choice == "5":
         calculate_gpa()
+
+    elif choice == "6":
+        Logout()
 
     elif choice == "0":
         print("Exiting Program...")
